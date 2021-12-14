@@ -1,5 +1,6 @@
 package sample.spring.yeol;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -24,5 +25,17 @@ public class BookDao {
 	public Map<String, Object> selectDetail(Map<String, Object> map) {
 		return this.sqlSessionTemplate.selectOne("book.select_detail", map);
 		// 데이터를 한 개만 가져올 때, 쿼리 결과가 0행이면 null, 다수면 TooManyResultsException
+	}
+	
+	public int update(Map<String, Object> map) {
+		return this.sqlSessionTemplate.update("book.update", map);
+	}
+	
+	public int delete(Map<String, Object> map) {
+		return this.sqlSessionTemplate.delete("book.delete", map);
+	}
+	
+	public List<Map<String, Object>> selectList(Map<String, Object> map) {
+		return this.sqlSessionTemplate.selectList("book.select_list", map);
 	}
 }

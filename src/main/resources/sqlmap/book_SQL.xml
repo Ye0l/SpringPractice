@@ -15,4 +15,28 @@
 		select * from book where book_id = #{bookId}
 		]]>
 	</select>
+	<update id="update" parameterType="hashMap">
+<!-- 이 양식은 도무지 기준을 모르겠다.. -->
+		<![CDATA[
+		update book set title = #{title}, category = #{category}, price = #{price}
+		where book_id = #{bookId} 
+		]]>
+	</update>
+	<delete id="delete" parameterType="hashMap">
+		<![CDATA[
+			delete from book where book_id = #{bookId}
+		]]>
+	</delete>
+	<select id="select_list" parameterType="hashMap" resultType="hashMap">
+	<!-- 1 = 1 은 관습적인 문구라고 한다.. 1 = 1은 늘 참이기 때문에 검색 조건을 and로 연결하는 데에 쓴다고 한다. -->
+		<![CDATA[
+			select * from book where 1 = 1
+		]]>
+		<if test="keyword != null and keyword != ''">
+		<!-- 마이바티스는 쿼리 파라미터에 '를 붙이지 않아서 title like '%#{keyword}%' 형식으로 표기하기 어렵다고 한다.
+			그래서 CONCAT함수를 쓴다는데 이게 마리아디비 함수라고 하니까.. 다른 디비의 경우에는 어떤지 알아둘것 -->
+			and (title like CONCAT('%', #{keyword}, '%') or category like CONCAT('%', #{keyword}, '%'))
+		</if>
+		order by insert_date desc
+	</select>
 </mapper>
