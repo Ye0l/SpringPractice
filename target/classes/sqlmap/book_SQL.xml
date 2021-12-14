@@ -8,6 +8,7 @@
 	    <![CDATA[
 	    insert into book(title, category, price) values(#{title}, #{category}, #{price})
 	    ]]>
+<!-- #{}와 ${}에 대한 정리: https://java119.tistory.com/39?category=824525 -->
 <!-- 그러니까 가져온 값을 꺼내서 select문에 집어넣고, DB에서 AutoIncreasement한 값을 받아서 들고온 다음 다시 BookDao로 돌아간다. -->
 	</insert>
 	<select id="select_detail" parameterType="hashMap" resultType="hashMap">
@@ -16,7 +17,7 @@
 		]]>
 	</select>
 	<update id="update" parameterType="hashMap">
-<!-- 이 양식은 도무지 기준을 모르겠다.. -->
+<!-- <![CDATA[]]>는 Character DATA라는 뜻으로 문자열 데이터임을 표시하는거라고 한다. SQL파일은 xml이라 <, >, & 등을 태그로 인식하는 사고를 막기 위한거라고 한다.. -->
 		<![CDATA[
 		update book set title = #{title}, category = #{category}, price = #{price}
 		where book_id = #{bookId} 
