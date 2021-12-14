@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="book">
-	<insert id="insert" parameterType="hashMap" useGeneratedKeys="true" keyProperty="book_id">  
+<!-- BookDao에서 넘어옴 -->
+	<insert id="insert" parameterType="hashMap" useGeneratedKeys="true" keyProperty="book_id">
+<!-- refernce: https://mybatis.org/mybatis-3/ko/sqlmap-xml.html -->
+<!-- parameterType, 그러니까 주는 값은 hashMap, useGeneratedKeys는 AutoIncreasement처럼 자동으로 증가한 값을 받아와서 Map객체 내에 세팅함 -->
 	    <![CDATA[
 	    insert into book(title, category, price) values(#{title}, #{category}, #{price})
 	    ]]>
+<!-- 그러니까 가져온 값을 꺼내서 select문에 집어넣고, DB에서 AutoIncreasement한 값을 받아서 들고온 다음 다시 BookDao로 돌아간다. -->
 	</insert>
 	<select id="select_detail" parameterType="hashMap" resultType="hashMap">
 		<![CDATA[

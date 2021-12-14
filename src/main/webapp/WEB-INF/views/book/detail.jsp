@@ -21,5 +21,6 @@
   <p>
    <a href="/list">목록으로</a>
   </p>
+  <p>이건 시험삼아 넣어보는 data에서 꺼낸 bookId: ${data.book_id }</p>
  </body>
 </html>
