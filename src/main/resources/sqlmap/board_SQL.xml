@@ -6,4 +6,19 @@
 			insert into board(title, writer, contents) values(#{title}, #{writer}, #{contents})
 		]]>
 	</insert>
+	<select id="select" parameterType="hashMap" resultType="hashMap">
+		<![CDATA[
+			select * from board where post_id=#{id}
+		]]>
+	</select>
+	<select id="select_all" resultType="hashMap">
+		<![CDATA[
+			select * from board order by post_id desc
+		]]>
+	</select>
+	<delete id="delete" parameterType="hashMap">
+		<![CDATA[
+			delete from board where post_id=#{id}
+		]]>
+	</delete>
 </mapper>
